@@ -1,0 +1,96 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'optparse'
+require 'colorize'
+require "zeitwerk"
+
+loader = Zeitwerk::Loader.new
+loader.push_dir('./lib')
+loader.setup
+
+def query(**args)
+  unless args[:field] && args[:query]
+    puts "Usage: bin/search_clients query --field=<name|email> --query=KEYWORD --file-path=FILE_PATH"
+    return
+  end
+
+  begin
+    results, error = SearchClient::Query.call(**args)
+    puts error.colorize(:red) and return if error
+
+    if results.empty?
+      puts 'Your query yielded no results.'.colorize(:blue)
+    else
+      puts 'Matches:'.colorize(:green)
+      results.each do |client|
+        puts "  - ID: #{client['id']}, Name: #{client['full_name']}, Email: #{client['email']}"
+      end
+    end
+  rescue => e
+    puts "Something went wrong!".colorize(:red)
+    puts "#{e.to_s}"
+    exit 1
+  end
+end
+
+def duplicates(**args)
+  unless args[:field]
+    puts "Usage: bin/search_clients duplicates --field=<name|email> --file-path=FILE_PATH"
+    return
+  end
+
+  begin
+    results, error = SearchClient::Duplicate.call(**args)
+    puts error.colorize(:red) and return if error
+
+    if results.empty?
+      puts 'Your query yielded no results.'.colorize(:blue)
+    else
+      puts 'Duplicates:'.colorize(:green)
+      results.each do |k, clients|
+        puts "  #{k}:"
+        clients.each do |client|
+          puts "  -- ID: #{client['id']}, Name: #{client['full_name']}, Email: #{client['email']}"
+        end
+      end
+    end
+  rescue => e
+    puts "Something went wrong!".colorize(:red)
+    puts "#{e.to_s}"
+    exit 1
+  end
+end
+
+def run_command(args)
+  command = args.shift
+  field = query = file_path = nil
+
+  op = OptionParser.new do |opts|
+    opts.banner = 'Usage: bin/search_clients query|duplicates [options]'
+    opts.on('-f', '--field FIELD', 'Field name to search') { |v| field = v.to_s.strip }
+    opts.on('-q', '--query VALUE', 'Keyword to search for') { |v| query = v.to_s.strip }
+    opts.on('-p', '--file-path FILE_PATH', 'Optional path to file') { |v| file_path = v.to_s.strip }
+  end
+
+  begin
+    op.parse!(args)
+  rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
+    puts e
+    puts op
+    exit 1
+  end
+
+  case command
+  when 'query'
+    query(field:, query:, file_path:)
+  when 'duplicates'
+    duplicates(field:, file_path:)
+  else
+    puts op
+  end
+end
+
+if __FILE__ == $PROGRAM_NAME
+  run_command(ARGV)
+end
