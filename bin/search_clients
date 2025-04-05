@@ -11,13 +11,14 @@ loader.setup
 
 def query(**args)
   unless args[:field] && args[:query]
+    puts 'Missing field or keyword'.colorize(:red)
     puts "Usage: bin/search_clients query --field=<name|email> --query=KEYWORD --file-path=FILE_PATH"
     return
   end
 
   begin
     results, error = SearchClient::Query.call(**args)
-    puts error.colorize(:red) and return if error
+    return puts error.colorize(:red) if error
 
     if results.empty?
       puts 'Your query yielded no results.'.colorize(:blue)
@@ -36,13 +37,14 @@ end
 
 def duplicates(**args)
   unless args[:field]
+    puts 'Missing field'.colorize(:red)
     puts "Usage: bin/search_clients duplicates --field=<name|email> --file-path=FILE_PATH"
     return
   end
 
   begin
     results, error = SearchClient::Duplicate.call(**args)
-    puts error.colorize(:red) and return if error
+    return puts error.colorize(:red) if error
 
     if results.empty?
       puts 'Your query yielded no results.'.colorize(:blue)
@@ -76,7 +78,7 @@ def run_command(args)
   begin
     op.parse!(args)
   rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
-    puts e
+    puts e.to_s.colorize(:red)
     puts op
     exit 1
   end
@@ -87,6 +89,7 @@ def run_command(args)
   when 'duplicates'
     duplicates(field:, file_path:)
   else
+    puts 'Missing command'.colorize(:red)
     puts op
   end
 end
