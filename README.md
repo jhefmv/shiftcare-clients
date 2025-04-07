@@ -5,7 +5,7 @@ This project provides a simple Ruby command-line application which offers two co
 
 ## Requirements
 
-* [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+* [Ruby](https://www.ruby-lang.org/en/documentation/installation/), version `3.3.5` used
 
 ## Installation
 
