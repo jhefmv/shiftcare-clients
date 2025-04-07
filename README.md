@@ -68,6 +68,7 @@ bundle exec rspec --format=documentation
 
 ## Limitations and Future Improvements
 
+- Runnable in Unix-like systems
 - Better error handling
 - Better results and display handling
 - Allow `duplicates` command to accept an email address with validation
