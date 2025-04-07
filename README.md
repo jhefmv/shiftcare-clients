@@ -64,3 +64,10 @@ rspec
 rspec --format=documentation
 bundle exec rspec --format=documentation
 ```
+
+## Limitations and Future Improvements
+
+- Better error handling
+- Better results and display handling
+- Allow `duplicates` command to accept an email address with validation
+- Cache JSON dataset 
