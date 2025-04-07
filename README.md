@@ -6,6 +6,7 @@ This project provides a simple Ruby command-line application which offers two co
 ## Requirements
 
 * [Ruby](https://www.ruby-lang.org/en/documentation/installation/), version `3.3.5` used
+* on Windows, Git Bash or Windows Subsystem for Linux (WSL)
 
 ## Installation
 
@@ -68,8 +69,13 @@ bundle exec rspec --format=documentation
 
 ## Limitations and Future Improvements
 
-- Runnable in Unix-like systems
 - Better error handling
 - Better results and display handling
 - Allow `duplicates` command to accept an email address with validation
 - Cache JSON dataset 
+
+
+## Assumptions
+
+- Runnable on Unix-like systems
+- on Windows, install Git Bash or Git Bash or Windows Subsystem for Linux (WSL)
