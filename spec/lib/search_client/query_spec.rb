@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../main'
-
 RSpec.describe SearchClient::Query do
   describe '.call' do
     let(:valid_json) { 'spec/fixtures/clients.json' }

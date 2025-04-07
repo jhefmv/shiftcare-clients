@@ -1,19 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'helpers/search_client_helper'
-
 module SearchClient
-  class Duplicate
-    include SearchClientHelper
-
-    def self.call(field:, **)
-      new(field:, **).call
-    end
-
-    def initialize(options)
-      @field = options[:field] == 'name' ? 'full_name' : options[:field]
-      @json_file = options[:file_path] || File.join(DATA_FILE_PATH, DATA_FILE_NAME)
-    end
+  class Duplicate < Base
 
     def call
       find_duplicates
