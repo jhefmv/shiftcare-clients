@@ -4,8 +4,10 @@ GEM
     colorize (1.1.0)
     diff-lcs (1.6.1)
     json (2.10.2)
+    logger (1.6.1)
     open3 (0.2.1)
     optparse (0.6.0)
+    ostruct (0.6.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -28,8 +30,10 @@ PLATFORMS
 DEPENDENCIES
   colorize
   json
+  logger
   open3
   optparse
+  ostruct
   rspec
   zeitwerk
 

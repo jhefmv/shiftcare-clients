@@ -9,6 +9,8 @@ gem 'json'
 gem 'open3'
 gem 'optparse'
 gem 'colorize'
+gem 'logger'
+gem "ostruct"
 
 group :test, :development do
   gem 'rspec'
