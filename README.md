@@ -22,22 +22,23 @@ bundle install
 **Search clients by name:**
 
 ```
-bin/search_clients query --field=name --query=Smith
+bin/search_clients query --field=name --query=<keyword>
 bin/search_clients query -f name -q Smith
 ```
 
 **Search clients by email:**
 
 ```
-bin/search_clients query --field=email --query=smith@
+bin/search_clients query --field=email --query=<keyword>
 bin/search_clients query -f email -q smith@
 ```
 
 **Search clients in a JSON file:**
 
 ```
-bin/search_clients query --field=name|email --query=smith@yahoo.com --file-path=path_to_file.json
-bin/search_clients query -f name|email -q smith@yahoo.com -p path_to_file.json
+bin/search_clients query --field=name|email --query=<keyword> --file-path=path_to_file.json
+bin/search_clients query -f name -q Smith -p path_to_file.json
+bin/search_clients query -f email -q smith@yahoo.com -p path_to_file.json
 ```
 
 ### Finding duplicate clients:
