@@ -11,5 +11,7 @@
 # Ignore .idea
 /.idea
 /.idea/*
+.idea
+.idea/*
 
 .DS_Store
