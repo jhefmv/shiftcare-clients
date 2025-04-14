@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+# require 'json'
+require 'optparse'
+require 'colorize'
+require_relative '../zeitwerk_loader'
+
+ZeitwerkLoader.setup
+
+def run_command(args)
+
+  command = args.shift
+  field = query = file_path = nil
+
+  op = OptionParser.new do |opts|
+    opts.banner = 'Usage: bin/search_clients query|duplicates [options]'
+    opts.on('-f', '--field FIELD', 'Field name to search') { |v| field = v.to_s.strip }
+    opts.on('-q', '--query VALUE', 'Keyword to search for') { |v| query = v.to_s.strip }
+    opts.on('-p', '--file-path FILE_PATH', 'Optional path to file') { |v| file_path = v.to_s.strip }
+  end
+
+  begin
+    op.parse!(args)
+  rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
+    puts e.to_s.colorize(:red)
+    puts op
+    exit 1
+  end
+
+  case command
+  when 'query'
+    puts 'query'
+  when 'duplicates'
+    puts 'duplicates'
+  else
+    puts 'Missing command'.colorize(:red)
+    puts op
+  end
+end
+#
+# if __FILE__ == $PROGRAM_NAME
+#   run_command(ARGV)
+# end
+SearchClient::Cli.new.run(ARGV)
+
+# run_command(ARGV)

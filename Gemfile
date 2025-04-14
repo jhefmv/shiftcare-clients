@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
+gem 'rake'
 gem 'zeitwerk'
 gem 'json'
 gem 'open3'
@@ -14,4 +15,5 @@ gem "ostruct"
 
 group :test, :development do
   gem 'rspec'
+  gem 'rubocop', require: false
 end
