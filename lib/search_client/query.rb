@@ -4,19 +4,18 @@ module SearchClient
   class Query < Base
 
     def call
+      raise 'Missing field or keyword!' unless @field && @keyword
+
       query
     end
 
     private
 
     def query
-      if json_data[0].empty?
-        json_data
-      else
-        matched_clients = json_data[0].select do |client|
-          client[@field] && client[@field].match?(Regexp.new(@query, 'i'))
-        end
-        [matched_clients, nil]
+      return unless json_data
+
+      json_data.select do |client|
+        client[@field] && client[@field].match?(Regexp.new(@keyword, 'i'))
       end
     end
   end
