@@ -58,6 +58,7 @@ module SearchClient
         parser.banner = 'Usage: search_clients COMMAND [options]'
         parser.on('-f', '--field NAME', 'Field name to search') { |v| options[:field] = v.to_s.strip }
         parser.on('-k', '--keyword VALUE', 'Keyword to search for') { |v| options[:keyword] = v.to_s.strip }
+        parser.on('-v', '--value VALUE', 'Value to search for') { |v| options[:value] = v.to_s.strip }
         parser.on('-p', '--file-path FILE_PATH', 'Optional path to file') { |v| options[:file_path] = v.to_s.strip }
       end
       op.parse!(args)
@@ -91,6 +92,18 @@ module SearchClient
           clients.each do |client|
             puts "  -- ID: #{client['id']}, Name: #{client['full_name']}, Email: #{client['email']}"
           end
+        end
+      end
+    end
+
+    def rating(args)
+      results = SearchClient::Rating.call(**args)
+      if results.empty?
+        puts 'Your query yielded no results.'.colorize(:blue)
+      else
+        puts 'Matches:'.colorize(:green)
+        results.each do |client|
+          puts "  - ID: #{client['id']}, Name: #{client['full_name']}, Email: #{client['email']}, Rating: #{client['rating']}"
         end
       end
     end
