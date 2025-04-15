@@ -30,6 +30,8 @@ module SearchClient
           query(options)
         when 'duplicates'
           duplicates(options)
+        when 'rating'
+          rating(options)
         when 'help'
           puts help
         else

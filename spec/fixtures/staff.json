@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "full_name": "John Smith",
+    "position": "Manager",
+    "department": "Sales",
+    "email": "john.smith@example.com",
+    "rating": 2.8
+  },
+  {
+    "id": 2,
+    "full_name": "Jane Doe",
+    "position": "Accountant",
+    "department": "Finance",
+    "email": "jane.doe@example.com",
+    "rating": 4.2
+  },
+  {
+    "id": 3,
+    "full_name": "Michael Johnson",
+    "position": "Engineer",
+    "department": "Engineering",
+    "email": "michael.johnson@example.com",
+    "rating": 3.5
+  },
+  {
+    "id": 4,
+    "full_name": "Emily Brown",
+    "position": "Designer",
+    "department": "Creative",
+    "email": "emily.brown@example.com",
+    "rating": 4.0
+  },
+  {
+    "id": 5,
+    "full_name": "Mike Johnson",
+    "position": "Developer",
+    "department": "IT",
+    "email": "michael.johnson@example.com",
+    "rating": 4.6
+  }
+]
